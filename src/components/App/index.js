@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import { Container, Row, Col } from 'react-bootstrap';
+
 import './style.css';
 
 class App extends Component {
@@ -47,30 +49,36 @@ class App extends Component {
         const {tasks} = this.state;
 
         return (
-            <div className="App">
-                <h1>Tasks List App</h1>
-                <form
-                    onSubmit={this.addNewTaskHandler}
-                >
-                    <input type="text" name="taskName" placeholder="Enter new task" />
-                    <button>Add task</button>
-                </form>
-                <div>
-                    <ul>
-                        {
-                            tasks.map(el => (
-                                <li key={el.id} className={el.isDone?'task_done':''}>
-                                    {el.title}
-                                    {
-                                        el.isDone?'':<button onClick={() => this.setTaskToDoneHandler(el.id)}>Make done</button>
-                                    }
-                                    <button onClick={() => this.removeTaskHandler(el.id)}>Remove task</button>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </div>
-            </div>
+            <Container>
+                <Row>
+                    <Col xs={12} className="my-4">
+                        <h1 className="text-center">Tasks List App</h1>
+                    </Col>
+                    <Col xs={12} className="my-4">
+                        <form
+                            onSubmit={this.addNewTaskHandler}
+                        >
+                            <input type="text" name="taskName" placeholder="Enter new task" />
+                            <button>Add task</button>
+                        </form>
+                    </Col>
+                    <Col xs={12} className="my-4">
+                        <ul>
+                            {
+                                tasks.map(el => (
+                                    <li key={el.id} className={el.isDone?'task_done':''}>
+                                        {el.title}
+                                        {
+                                            el.isDone?'':<button onClick={() => this.setTaskToDoneHandler(el.id)}>Make done</button>
+                                        }
+                                        <button onClick={() => this.removeTaskHandler(el.id)}>Remove task</button>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }
