@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
+import Header from '../../containers/Header';
+import AddNewTaskForm from "../AddNewTaskForm";
+import TasksList from "../TasksList";
 
 import './style.css';
 
@@ -15,7 +18,8 @@ class App extends Component {
                 {id: Math.random(),title: 'Task #3', isDone: false},
                 {id: Math.random(),title: 'Task #4', isDone: true},
                 {id: Math.random(),title: 'Task #5', isDone: false},
-            ]
+            ],
+            appHeader: 'Tasks List App',
         };
 
         this.addNewTaskHandler = (e) => {
@@ -46,37 +50,18 @@ class App extends Component {
 
     render(){
 
-        const {tasks} = this.state;
+        const {tasks, appHeader} = this.state;
 
         return (
             <Container>
                 <Row>
-                    <Col xs={12} className="my-4">
-                        <h1 className="text-center">Tasks List App</h1>
-                    </Col>
-                    <Col xs={12} className="my-4">
-                        <form
-                            onSubmit={this.addNewTaskHandler}
-                        >
-                            <input type="text" name="taskName" placeholder="Enter new task" />
-                            <button>Add task</button>
-                        </form>
-                    </Col>
-                    <Col xs={12} className="my-4">
-                        <ul>
-                            {
-                                tasks.map(el => (
-                                    <li key={el.id} className={el.isDone?'task_done':''}>
-                                        {el.title}
-                                        {
-                                            el.isDone?'':<button onClick={() => this.setTaskToDoneHandler(el.id)}>Make done</button>
-                                        }
-                                        <button onClick={() => this.removeTaskHandler(el.id)}>Remove task</button>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </Col>
+                    <Header header={appHeader}/>
+                    <AddNewTaskForm addNewTaskHandler={this.addNewTaskHandler}/>
+                    <TasksList
+                        tasks={tasks}
+                        setTaskToDoneHandler={this.setTaskToDoneHandler}
+                        removeTaskHandler={this.removeTaskHandler}
+                    />
                 </Row>
             </Container>
         );
