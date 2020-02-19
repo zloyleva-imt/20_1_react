@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TaskItem = ({data,setTaskToDoneHandler,removeTaskHandler}) => (
-    <li key={data.id} className={data.isDone?'task_done':''}>
+    <li className={data.isDone?'task_done':''}>
         {data.title}
         {
             data.isDone?'':<button onClick={() => setTaskToDoneHandler(data.id)}>Make done</button>

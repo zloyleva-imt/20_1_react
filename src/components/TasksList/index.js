@@ -9,6 +9,7 @@ const TasksList = ({tasks,setTaskToDoneHandler,removeTaskHandler}) => (
             {
                 tasks.map(el => (
                     <TaskItem
+                        key={el.id}
                         data={el}
                         setTaskToDoneHandler={setTaskToDoneHandler}
                         removeTaskHandler={removeTaskHandler}

@@ -12,14 +12,9 @@ class App extends Component {
         super(props);
 
         this.state = {
-            tasks: [
-                {id: Math.random(),title: 'Task #1', isDone: false},
-                {id: Math.random(),title: 'Task #2', isDone: true},
-                {id: Math.random(),title: 'Task #3', isDone: false},
-                {id: Math.random(),title: 'Task #4', isDone: true},
-                {id: Math.random(),title: 'Task #5', isDone: false},
-            ],
+            tasks: [],
             appHeader: 'Tasks List App',
+            isLoading: false,
         };
 
         this.addNewTaskHandler = (e) => {
@@ -43,13 +38,28 @@ class App extends Component {
             tasks: [
                 ...this.state.tasks.filter(el => el.id!==task_id)
             ]
-        })
+        });
+
+        console.log('constructor')
     }
 
-
+    componentDidMount(){
+        console.log('componentDidMount');
+        setTimeout(() => {
+            this.setState({
+                tasks: [
+                    {id: Math.random(),title: 'Task #1', isDone: false},
+                    {id: Math.random(),title: 'Task #2', isDone: true},
+                    {id: Math.random(),title: 'Task #3', isDone: false},
+                    {id: Math.random(),title: 'Task #4', isDone: true},
+                    {id: Math.random(),title: 'Task #5', isDone: false},
+                ]
+            })
+        }, 10000)
+    }
 
     render(){
-
+        console.log('render')
         const {tasks, appHeader} = this.state;
 
         return (
